@@ -421,10 +421,34 @@ const Home = () => {
   // }
 
   return (
+    // <div
+    //   className={`relative h-full overflow-hidden transition-colors duration-500 ${
+    //     isDarkMode
+    //       ? "bg-gradient-to-br from-slate-900 via-blue-950 to-gray-900 text-slate-100"
+    //       : "bg-gradient-to-br from-slate-50 via-blue-50 to-gray-100 text-slate-900"
+    //   }`}
+    //   <div
+    // className={`relative h-full overflow-hidden transition-colors duration-500 ${
+    //   isDarkMode
+    //     ? "bg-gradient-to-br from-gray-900 via-gray-800 to-slate-900 text-gray-100"
+    //     : "bg-gradient-to-br from-slate-50 via-blue-50 to-gray-100 text-slate-900"
+    // }`}
+    // <div
+    //   className={`relative h-full overflow-hidden transition-colors duration-500 ${
+    //     isDarkMode
+    //       ? "bg-gradient-to-br from-zinc-900 via-neutral-900 to-stone-900 text-zinc-100"
+    //       : "bg-gradient-to-br from-slate-50 via-blue-50 to-gray-100 text-slate-900"
+    //   }`}
+    // <div
+    //   className={`relative h-full overflow-hidden transition-colors duration-500 ${
+    //     isDarkMode
+    //       ? "bg-gradient-to-br from-slate-950 via-gray-900 to-zinc-950 text-slate-200"
+    //       : "bg-gradient-to-br from-slate-50 via-blue-50 to-gray-100 text-slate-900"
+    //   }`}
     <div
       className={`relative h-full overflow-hidden transition-colors duration-500 ${
         isDarkMode
-          ? "bg-gradient-to-br from-slate-900 via-blue-950 to-gray-900 text-slate-100"
+          ? "bg-gradient-to-br from-neutral-950 via-zinc-900 to-gray-950 text-neutral-200"
           : "bg-gradient-to-br from-slate-50 via-blue-50 to-gray-100 text-slate-900"
       }`}
     >
