@@ -399,9 +399,9 @@ const Partners = ({ partners, partnersLoading }) => {
         {partnersLoading ? (
           // Loading State
           <div className="py-12 text-center">
-            <div className="inline-flex items-center px-4 py-2 text-sm leading-6 font-semibold text-gray-500 transition-colors duration-300 dark:text-gray-400">
+            <div className="inline-flex items-center px-4 py-2 text-sm font-semibold leading-6 text-gray-500 transition-colors duration-300 dark:text-gray-400">
               <svg
-                className="mr-3 -ml-1 h-5 w-5 animate-spin text-gray-500 transition-colors duration-300 dark:text-gray-400"
+                className="-ml-1 mr-3 h-5 w-5 animate-spin text-gray-500 transition-colors duration-300 dark:text-gray-400"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -499,8 +499,8 @@ const PartnerLogo = ({ partner }) => {
 
   const LogoContent = () => (
     <div className="group mx-6 flex items-center justify-center">
-      <div className="relative flex h-16 w-36 cursor-pointer items-center justify-center rounded-[10px] bg-transparent p-4 backdrop-blur-sm transition-all duration-300 dark:border dark:border-white/20 dark:bg-white/15 dark:backdrop-blur-sm">
-        {/* Logo Container */}
+      <div className="relative flex h-16 w-36 cursor-pointer items-center justify-center rounded-[10px] bg-transparent p-4 backdrop-blur-sm transition-all duration-300">
+        {/* <div className="relative flex h-16 w-36 cursor-pointer items-center justify-center rounded-[10px] bg-transparent p-4 backdrop-blur-sm transition-all duration-300 dark:border dark:border-white/20 dark:bg-white/15 dark:backdrop-blur-sm"> */}
         <div className="relative z-10 flex h-full w-full items-center justify-center">
           {imageUrl ? (
             <img

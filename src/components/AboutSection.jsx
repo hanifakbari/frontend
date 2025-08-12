@@ -82,7 +82,10 @@ const AboutSection = ({ data, isDarkMode }) => {
   };
 
   return (
-    <section className="relative py-20 transition-colors duration-500">
+    <section
+      id="about"
+      className="relative py-20 transition-colors duration-500"
+    >
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="mb-16 text-center lg:mb-20">

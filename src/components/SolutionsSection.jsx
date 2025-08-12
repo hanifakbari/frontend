@@ -175,7 +175,10 @@ const SolutionsSection = ({ data, isDarkMode }) => {
   };
 
   return (
-    <section className="relative py-20 transition-colors duration-500 lg:py-32">
+    <section
+      id="services"
+      className="relative py-20 transition-colors duration-500 lg:py-32"
+    >
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="mb-16 text-center lg:mb-20">

@@ -1,67 +1,254 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="id">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+
+    <!-- Primary Meta Tags -->
+    <title>Asta Lintas Indonesia</title>
+    <meta
+      name="title"
+      content="Nama Website | Deskripsi Singkat - Kata Kunci Utama"
+    />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Deskripsi website yang menarik dan informatif (150-160 karakter). Jelaskan manfaat utama dan nilai yang ditawarkan kepada pengunjung."
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta
+      name="keywords"
+      content="kata kunci 1, kata kunci 2, kata kunci 3, kata kunci utama"
+    />
+    <meta
+      name="author"
+      content="Nama Author atau Company"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Indonesian" />
+    <meta name="revisit-after" content="7 days" />
+
+    <!-- Viewport -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+
+    <!-- Theme and Color -->
+    <meta name="theme-color" content="#1f2937" />
+    <meta
+      name="msapplication-TileColor"
+      content="#1f2937"
+    />
+    <meta
+      name="msapplication-navbutton-color"
+      content="#1f2937"
+    />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://namawebsite.com/"
+    />
+    <meta
+      property="og:title"
+      content="Nama Website | Deskripsi Singkat"
+    />
+    <meta
+      property="og:description"
+      content="Deskripsi menarik untuk media sosial (maksimal 300 karakter)"
+    />
+    <meta property="og:image" content="/asta.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content="Nama Website" />
+
+    <!-- Twitter -->
+    <meta
+      property="twitter:card"
+      content="summary_large_image"
+    />
+    <meta
+      property="twitter:url"
+      content="https://namawebsite.com/"
+    />
+    <meta
+      property="twitter:title"
+      content="Nama Website | Deskripsi Singkat"
+    />
+    <meta
+      property="twitter:description"
+      content="Deskripsi menarik untuk Twitter (maksimal 200 karakter)"
+    />
+    <meta property="twitter:image" content="/asta.png" />
+    <meta property="twitter:creator" content="@username" />
+    <meta property="twitter:site" content="@namawebsite" />
+
+    <!-- Favicons -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="%PUBLIC_URL%/asta.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="%PUBLIC_URL%/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="%PUBLIC_URL%/favicon-32x32.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="%PUBLIC_URL%/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="%PUBLIC_URL%/android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="%PUBLIC_URL%/android-chrome-512x512.png"
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://namawebsite.com/" />
+
+    <!-- DNS Prefetch & Preconnect -->
+    <link
+      rel="dns-prefetch"
+      href="//fonts.googleapis.com"
+    />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+
+    <!-- Fonts - Optimized Loading -->
     <link
       href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Theme Script - Prevent flashing -->
+    <!-- Theme Script - Prevent Flash of Unstyled Content -->
     <script>
       (function () {
-        const theme = localStorage.getItem("theme");
-        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-          .matches
-          ? "dark"
-          : "light";
+        try {
+          const theme = localStorage.getItem("theme");
+          const systemTheme = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches
+            ? "dark"
+            : "light";
 
-        if (theme === "dark" || (!theme && systemTheme === "dark")) {
+          // Default to dark theme
+          const shouldBeDark = theme !== "light";
+
+          if (shouldBeDark) {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove(
+              "dark"
+            );
+          }
+        } catch (e) {
+          // Fallback jika localStorage tidak tersedia
           document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
         }
       })();
     </script>
 
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Nama Website",
+        "url": "https://namawebsite.com",
+        "description": "Deskripsi website yang informatif",
+        "author": {
+          "@type": "Person",
+          "name": "Nama Author"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://namawebsite.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <!-- Manifest -->
+    <link
+      rel="manifest"
+      href="%PUBLIC_URL%/manifest.json"
+    />
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-capable"
+      content="yes"
+    />
+    <meta
+      name="apple-mobile-web-app-title"
+      content="Nama Website"
+    />
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+      <div
+        style="
+          text-align: center;
+          padding: 50px;
+          font-family: Arial, sans-serif;
+        "
+      >
+        <h1>JavaScript Diperlukan</h1>
+        <p>
+          Website ini memerlukan JavaScript untuk berfungsi
+          dengan baik. Silakan aktifkan JavaScript di
+          browser Anda.
+        </p>
+      </div>
+    </noscript>
+
+    <!-- Main App Container -->
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <!-- Structured Data untuk Breadcrumb (opsional) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://namawebsite.com"
+          }
+        ]
+      }
+    </script>
   </body>
 </html>

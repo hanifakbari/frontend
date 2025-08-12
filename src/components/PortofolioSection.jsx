@@ -30,7 +30,7 @@ const PortfolioSection = ({ data, isDarkMode }) => {
         color: "blue",
         companies: [
           {
-            name: "PT. Global Manufacturing Indonesia",
+            name: "PT. Exspan Petrogas Intranusa",
             industry: "Manufacturing",
             logo: {
               url: "/api/placeholder/120/60",
@@ -47,8 +47,8 @@ const PortfolioSection = ({ data, isDarkMode }) => {
         color: "green",
         companies: [
           {
-            name: "PT. Energy Sustainable Indonesia",
-            industry: "Energy",
+            name: "Alfikom Multi System",
+            industry: "Industrial",
             logo: {
               url: "/api/placeholder/120/60",
               alternativeText: "Energy Sustainable Logo",
@@ -56,8 +56,8 @@ const PortfolioSection = ({ data, isDarkMode }) => {
             completionYear: "2024",
           },
           {
-            name: "PT. Mining Operations Nusantara",
-            industry: "Mining",
+            name: "PT. Jada Energy Nusantara",
+            industry: "Energy",
             logo: {
               url: "/api/placeholder/120/60",
               alternativeText: "Mining Operations Logo",
@@ -73,8 +73,8 @@ const PortfolioSection = ({ data, isDarkMode }) => {
         color: "purple",
         companies: [
           {
-            name: "PT. Financial Services Mandiri",
-            industry: "Financial Services",
+            name: "Klinik Metacate",
+            industry: "Healthcare",
             logo: {
               url: "/api/placeholder/120/60",
               alternativeText: "Financial Services Logo",
@@ -82,8 +82,8 @@ const PortfolioSection = ({ data, isDarkMode }) => {
             completionYear: "2024",
           },
           {
-            name: "PT. Healthcare Solutions Indonesia",
-            industry: "Healthcare",
+            name: "Medco Agro",
+            industry: "Agriculture",
             logo: {
               url: "/api/placeholder/120/60",
               alternativeText: "Healthcare Solutions Logo",
@@ -91,8 +91,8 @@ const PortfolioSection = ({ data, isDarkMode }) => {
             completionYear: "2023",
           },
           {
-            name: "PT. Education Excellence Foundation",
-            industry: "Education",
+            name: "Multifab",
+            industry: "Manufacturing",
             logo: {
               url: "/api/placeholder/120/60",
               alternativeText: "Education Excellence Logo",
@@ -108,7 +108,7 @@ const PortfolioSection = ({ data, isDarkMode }) => {
         color: "orange",
         companies: [
           {
-            name: "PT. Retail Chain Indonesia",
+            name: "Mall Pondok Indah",
             industry: "Retail",
             logo: {
               url: "/api/placeholder/120/60",
@@ -117,8 +117,8 @@ const PortfolioSection = ({ data, isDarkMode }) => {
             completionYear: "2024",
           },
           {
-            name: "PT. Logistics Express Nusantara",
-            industry: "Logistics",
+            name: "Axion Healthindo",
+            industry: "Healthcare",
             logo: {
               url: "/api/placeholder/120/60",
               alternativeText: "Logistics Express Logo",
@@ -126,8 +126,8 @@ const PortfolioSection = ({ data, isDarkMode }) => {
             completionYear: "2024",
           },
           {
-            name: "PT. Automotive Parts Manufacturing",
-            industry: "Automotive",
+            name: "Berita Jakarta",
+            industry: "Media",
             logo: {
               url: "/api/placeholder/120/60",
               alternativeText: "Automotive Parts Logo",
@@ -135,8 +135,8 @@ const PortfolioSection = ({ data, isDarkMode }) => {
             completionYear: "2023",
           },
           {
-            name: "PT. Pharmaceutical Research Indo",
-            industry: "Pharmaceutical",
+            name: "SII",
+            industry: "Industry",
             logo: {
               url: "/api/placeholder/120/60",
               alternativeText:
@@ -145,8 +145,8 @@ const PortfolioSection = ({ data, isDarkMode }) => {
             completionYear: "2023",
           },
           {
-            name: "PT. Technology Startup Accelerator",
-            industry: "Technology",
+            name: "TVRI Lampung",
+            industry: "Media",
             logo: {
               url: "/api/placeholder/120/60",
               alternativeText: "Technology Startup Logo",
@@ -215,7 +215,10 @@ const PortfolioSection = ({ data, isDarkMode }) => {
   };
 
   return (
-    <section className="relative py-10 transition-colors duration-500">
+    <section
+      id="portfolio"
+      className="relative py-10 transition-colors duration-500"
+    >
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="mb-16 text-center lg:mb-20">

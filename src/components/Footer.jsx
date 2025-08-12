@@ -50,24 +50,24 @@ const Footer = ({ data, isDarkMode = false }) => {
       ],
       company: [
         { name: "About Us", href: "/about" },
-        { name: "Our Team", href: "/team" },
-        { name: "Careers", href: "/careers" },
-        { name: "News & Updates", href: "/news" },
-        { name: "Case Studies", href: "/case-studies" },
+        // { name: "Our Team", href: "/team" },
+        // { name: "Careers", href: "/careers" },
+        // { name: "News & Updates", href: "/news" },
+        // { name: "Case Studies", href: "/case-studies" },
       ],
-      resources: [
-        { name: "Documentation", href: "/docs" },
-        { name: "API Reference", href: "/api" },
-        { name: "Support Center", href: "/support" },
-        { name: "Community", href: "/community" },
-        { name: "Blog", href: "/blog" },
-      ],
-      legal: [
-        { name: "Privacy Policy", href: "/privacy" },
-        { name: "Terms of Service", href: "/terms" },
-        { name: "Cookie Policy", href: "/cookies" },
-        { name: "GDPR Compliance", href: "/gdpr" },
-      ],
+      // resources: [
+      //   { name: "Documentation", href: "/docs" },
+      //   { name: "API Reference", href: "/api" },
+      //   { name: "Support Center", href: "/support" },
+      //   { name: "Community", href: "/community" },
+      //   { name: "Blog", href: "/blog" },
+      // ],
+      // legal: [
+      //   { name: "Privacy Policy", href: "/privacy" },
+      //   { name: "Terms of Service", href: "/terms" },
+      //   { name: "Cookie Policy", href: "/cookies" },
+      //   { name: "GDPR Compliance", href: "/gdpr" },
+      // ],
     },
     social: [
       {
@@ -142,7 +142,7 @@ const Footer = ({ data, isDarkMode = false }) => {
   ];
 
   return (
-    <footer className="relative py-4 transition-colors duration-500">
+    <footer className="relative bg-white/[1%] py-4 backdrop-blur-lg transition-colors duration-500">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
           className={`absolute -top-10 -right-10 h-40 w-40 rounded-full opacity-20 blur-3xl ${
@@ -440,7 +440,7 @@ const Footer = ({ data, isDarkMode = false }) => {
           }`}
         >
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <div className="flex flex-col items-center justify-between space-y-4 sm:flex-row sm:space-y-0">
+            <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-y-0">
               <div className="flex items-center space-x-2">
                 <span
                   className={`text-sm transition-colors duration-300 ${
