@@ -783,13 +783,13 @@ const HeroSection = ({
           </h1>
 
           {/* Glowing underline */}
-          <div
+          {/* <div
             className={`mx-auto mb-8 h-1 w-32 rounded-full shadow-lg transition-all duration-300 ${
               isDarkMode
                 ? "bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 shadow-blue-500/50"
                 : "bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 shadow-blue-400/40"
             }`}
-          ></div>
+          ></div> */}
 
           {/* Description */}
           {Array.isArray(description) && (
@@ -845,62 +845,6 @@ const HeroSection = ({
             </button>
           </div>
           {/* Floating Stats */}
-          <div className="absolute left-8 top-1/4 hidden lg:block">
-            <div
-              className={`rounded-2xl border p-4 text-center backdrop-blur-md transition-colors duration-300 ${
-                isDarkMode
-                  ? "border-gray-700/50 bg-gray-900/40"
-                  : "border-gray-300/40 bg-white/60"
-              }`}
-            >
-              <div className="text-2xl font-bold text-blue-400">
-                99.9%
-              </div>
-              <div
-                className={`text-sm ${isDarkMode ? "text-gray-400" : "text-gray-500"}`}
-              >
-                Uptime
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute right-8 top-1/3 hidden lg:block">
-            <div
-              className={`rounded-2xl border p-4 text-center backdrop-blur-md transition-colors duration-300 ${
-                isDarkMode
-                  ? "border-gray-700/50 bg-gray-900/40"
-                  : "border-gray-300/40 bg-white/60"
-              }`}
-            >
-              <div className="text-2xl font-bold text-purple-400">
-                500+
-              </div>
-              <div
-                className={`text-sm ${isDarkMode ? "text-gray-400" : "text-gray-500"}`}
-              >
-                Projects
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute bottom-1/4 left-12 hidden lg:block">
-            <div
-              className={`rounded-2xl border p-4 text-center backdrop-blur-md transition-colors duration-300 ${
-                isDarkMode
-                  ? "border-gray-700/50 bg-gray-900/40"
-                  : "border-gray-300/40 bg-white/60"
-              }`}
-            >
-              <div className="text-2xl font-bold text-orange-400">
-                24/7
-              </div>
-              <div
-                className={`text-sm ${isDarkMode ? "text-gray-400" : "text-gray-500"}`}
-              >
-                Support
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </div>
