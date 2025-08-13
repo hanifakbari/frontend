@@ -1,10 +1,275 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+// import { Sun, Moon, Menu, X } from "lucide-react";
+// import { Assets } from "../assets";
+
+// const Navbar = ({ isDarkMode, toggleDarkMode }) => {
+//   const [isMenuOpen, setIsMenuOpen] = useState(false);
+//   const [isRotating, setIsRotating] = useState(false);
+
+//   const toggleMenu = () => {
+//     setIsMenuOpen(!isMenuOpen);
+//   };
+
+//   const handleDarkModeToggle = () => {
+//     setIsRotating(true);
+//     toggleDarkMode();
+
+//     setTimeout(() => {
+//       setIsRotating(false);
+//     }, 300);
+//   };
+
+//   const scrollToSection = (sectionId) => {
+//     const element = document.getElementById(sectionId);
+//     if (element) {
+//       const navbarHeight = 120;
+//       const elementPosition =
+//         element.offsetTop - navbarHeight;
+
+//       window.scrollTo({
+//         top: elementPosition,
+//         behavior: "smooth",
+//       });
+//     }
+//     if (isMenuOpen) {
+//       setIsMenuOpen(false);
+//     }
+//   };
+
+//   return (
+//     <nav className="fixed top-0 z-50 w-full px-4 py-2">
+//       <div className="mx-auto flex max-w-7xl items-center justify-between">
+//         <div className="flex h-20 w-20 items-center lg:h-32 lg:w-32">
+//           <img
+//             src={
+//               isDarkMode ? Assets.AstaWhite : Assets.Asta
+//             }
+//             alt="Asta Logo"
+//             className="cursor-pointer transition-all duration-300"
+//             onClick={() => scrollToSection("home")}
+//             onError={(e) => {
+//               e.target.style.display = "none";
+//               e.target.nextSibling.style.display = "flex";
+//             }}
+//           />
+//         </div>
+
+//         <div
+//           className={`hidden items-center space-x-8 rounded-full border-[0.25px] border-white px-8 py-3 backdrop-blur-md dark:border-white/10 md:flex ${
+//             isDarkMode
+//               ? "bg-backdrop-blur-sm bg-white/15"
+//               : "bg-white/40 backdrop-blur-sm"
+//           } border-transparent`}
+//         >
+//           <button
+//             onClick={() => scrollToSection("home")}
+//             className={`font-semibold transition-colors hover:text-orange-500 ${
+//               isDarkMode ? "text-gray-300" : "text-gray-700"
+//             }`}
+//           >
+//             Home
+//           </button>
+//           <button
+//             onClick={() => scrollToSection("about")}
+//             className={`font-semibold transition-colors hover:text-orange-500 ${
+//               isDarkMode ? "text-gray-300" : "text-gray-700"
+//             }`}
+//           >
+//             About
+//           </button>
+//           <button
+//             onClick={() => scrollToSection("services")}
+//             className={`font-semibold transition-colors hover:text-orange-500 ${
+//               isDarkMode ? "text-gray-300" : "text-gray-700"
+//             }`}
+//           >
+//             Services
+//           </button>
+//           <button
+//             onClick={() => scrollToSection("portfolio")}
+//             className={`font-semibold transition-colors hover:text-orange-500 ${
+//               isDarkMode ? "text-gray-300" : "text-gray-700"
+//             }`}
+//           >
+//             Portfolio
+//           </button>
+//           <button
+//             onClick={() => scrollToSection("contact")}
+//             className={`font-semibold transition-colors hover:text-orange-500 ${
+//               isDarkMode ? "text-gray-300" : "text-gray-700"
+//             }`}
+//           >
+//             Contact
+//           </button>
+//         </div>
+
+//         {/* Desktop Actions */}
+//         <div className="hidden gap-6 md:flex">
+//           <button
+//             onClick={handleDarkModeToggle}
+//             className={`transition-all duration-300 ${
+//               !isRotating ? "hover:scale-105" : ""
+//             } ${
+//               isDarkMode
+//                 ? "text-white hover:text-yellow-300"
+//                 : "text-gray-900 hover:text-blue-600"
+//             } ${isRotating ? "animate-spin" : ""}`}
+//           >
+//             {isDarkMode ? (
+//               <Sun
+//                 size={24}
+//                 className="transition-transform duration-300"
+//               />
+//             ) : (
+//               <Moon
+//                 size={24}
+//                 className="transition-transform duration-300"
+//               />
+//             )}
+//           </button>
+//           <button
+//             onClick={() => scrollToSection("contact")}
+//             className="transform rounded-[10px] bg-[#2563EB] px-6 py-2 font-semibold text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-[#1d4ed8] hover:shadow-xl"
+//           >
+//             Get Started
+//           </button>
+//         </div>
+
+//         <div className="flex items-center space-x-4 md:hidden">
+//           <button
+//             onClick={handleDarkModeToggle}
+//             className={`transition-all duration-300 ${
+//               !isRotating ? "hover:scale-110" : ""
+//             } ${
+//               isDarkMode
+//                 ? "text-white hover:text-yellow-300"
+//                 : "text-gray-600 hover:text-blue-600"
+//             } ${isRotating ? "animate-spin" : ""}`}
+//           >
+//             {isDarkMode ? (
+//               <Sun
+//                 size={20}
+//                 className="transition-transform duration-300"
+//               />
+//             ) : (
+//               <Moon
+//                 size={20}
+//                 className="transition-transform duration-300"
+//               />
+//             )}
+//           </button>
+//           <button
+//             onClick={toggleMenu}
+//             className={`p-2 transition-all duration-300 hover:scale-110 ${isDarkMode ? "text-white" : "text-gray-900"}`}
+//           >
+//             {isMenuOpen ? (
+//               <X
+//                 size={24}
+//                 className="transition-transform duration-300"
+//               />
+//             ) : (
+//               <Menu
+//                 size={24}
+//                 className="transition-transform duration-300"
+//               />
+//             )}
+//           </button>
+//         </div>
+//       </div>
+
+//       {isMenuOpen && (
+//         <div
+//           className={`mt-4 transform pb-4 backdrop-blur-md transition-all duration-300 ease-out md:hidden ${
+//             isDarkMode ? "bg-gray-800/20" : "bg-white/10"
+//           } rounded-2xl border border-white/20 shadow-xl`}
+//         >
+//           <div className="flex flex-col space-y-4 px-4 py-4">
+//             <button
+//               onClick={() => scrollToSection("home")}
+//               className={`text-left font-semibold transition-colors hover:text-orange-500 ${
+//                 isDarkMode
+//                   ? "text-gray-300"
+//                   : "text-gray-700"
+//               }`}
+//             >
+//               Home
+//             </button>
+
+//             <button
+//               onClick={() => scrollToSection("about")}
+//               className={`text-left font-semibold transition-colors hover:text-orange-500 ${
+//                 isDarkMode
+//                   ? "text-gray-300"
+//                   : "text-gray-700"
+//               }`}
+//             >
+//               About
+//             </button>
+//             <button
+//               onClick={() => scrollToSection("services")}
+//               className={`text-left font-semibold transition-colors hover:text-orange-500 ${
+//                 isDarkMode
+//                   ? "text-gray-300"
+//                   : "text-gray-700"
+//               }`}
+//             >
+//               Services
+//             </button>
+//             <button
+//               onClick={() => scrollToSection("portfolio")}
+//               className={`text-left font-semibold transition-colors hover:text-orange-500 ${
+//                 isDarkMode
+//                   ? "text-gray-300"
+//                   : "text-gray-700"
+//               }`}
+//             >
+//               Portfolio
+//             </button>
+//             <button
+//               onClick={() => scrollToSection("contact")}
+//               className={`text-left font-semibold transition-colors hover:text-orange-500 ${
+//                 isDarkMode
+//                   ? "text-gray-300"
+//                   : "text-gray-700"
+//               }`}
+//             >
+//               Contact
+//             </button>
+
+//             {/* Mobile Get Started Button */}
+//             <button
+//               onClick={() => scrollToSection("contact")}
+//               className="mt-4 transform rounded-[10px] bg-[#2563EB] px-6 py-2 font-semibold text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-[#1d4ed8] hover:shadow-xl"
+//             >
+//               Get Started
+//             </button>
+//           </div>
+//         </div>
+//       )}
+//     </nav>
+//   );
+// };
+
+// export default Navbar;
+
+import React, { useState, useEffect } from "react";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { Assets } from "../assets";
 
 const Navbar = ({ isDarkMode, toggleDarkMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isRotating, setIsRotating] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () =>
+      window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -14,17 +279,15 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
     setIsRotating(true);
     toggleDarkMode();
 
-    // Reset rotation state after animation completes
     setTimeout(() => {
       setIsRotating(false);
     }, 300);
   };
 
-  // Smooth scroll function
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const navbarHeight = 120; // Adjust based on your navbar height
+      const navbarHeight = 120;
       const elementPosition =
         element.offsetTop - navbarHeight;
 
@@ -33,17 +296,23 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
         behavior: "smooth",
       });
     }
-
-    // Close mobile menu after clicking
     if (isMenuOpen) {
       setIsMenuOpen(false);
     }
   };
 
   return (
-    <nav className="fixed top-0 z-50 w-full px-4 py-2">
+    <nav
+      className={`fixed top-0 z-50 w-full px-4 transition-all duration-300 ${
+        isScrolled
+          ? isDarkMode
+            ? "border-b border-white/10 bg-black/20 backdrop-blur-xl"
+            : "border-b border-black/10 bg-white/20 backdrop-blur-xl"
+          : ""
+      }`}
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between">
-        <div className="flex h-20 w-20 items-center lg:h-32 lg:w-32">
+        <div className="flex h-28 w-28 items-center">
           <img
             src={
               isDarkMode ? Assets.AstaWhite : Assets.Asta
@@ -58,50 +327,62 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
           />
         </div>
 
-        {/* Desktop Menu */}
+        {/* Navigation Menu - Transparent saat scroll */}
         <div
-          className={`hidden items-center space-x-8 rounded-full border-[0.25px] border-white px-8 py-3 backdrop-blur-md md:flex dark:border-white/10 ${
-            isDarkMode
-              ? "bg-backdrop-blur-sm bg-white/15"
-              : "bg-white/40 backdrop-blur-sm"
-          } border-transparent`}
+          className={`hidden items-center space-x-8 rounded-full border px-8 py-3 transition-all duration-300 md:flex ${
+            isScrolled
+              ? "border-transparent bg-transparent shadow-none"
+              : isDarkMode
+                ? "border-white/5 bg-gradient-to-t from-white/10 to-white/[1%] shadow-lg backdrop-blur-xl"
+                : "to-white/2 border-white/30 bg-gradient-to-r from-white/20 via-white/5 shadow-lg shadow-gray-300/30 backdrop-blur-xl"
+          }`}
         >
           <button
             onClick={() => scrollToSection("home")}
-            className={`font-semibold transition-colors hover:text-orange-500 ${
-              isDarkMode ? "text-gray-300" : "text-gray-700"
+            className={`font-semibold transition-all duration-300 hover:scale-105 hover:text-orange-500 ${
+              isDarkMode
+                ? "text-gray-200 hover:text-orange-400"
+                : "text-gray-700 hover:text-orange-600"
             }`}
           >
             Home
           </button>
           <button
             onClick={() => scrollToSection("about")}
-            className={`font-semibold transition-colors hover:text-orange-500 ${
-              isDarkMode ? "text-gray-300" : "text-gray-700"
+            className={`font-semibold transition-all duration-300 hover:scale-105 hover:text-orange-500 ${
+              isDarkMode
+                ? "text-gray-200 hover:text-orange-400"
+                : "text-gray-700 hover:text-orange-600"
             }`}
           >
             About
           </button>
           <button
             onClick={() => scrollToSection("services")}
-            className={`font-semibold transition-colors hover:text-orange-500 ${
-              isDarkMode ? "text-gray-300" : "text-gray-700"
+            className={`font-semibold transition-all duration-300 hover:scale-105 hover:text-orange-500 ${
+              isDarkMode
+                ? "text-gray-200 hover:text-orange-400"
+                : "text-gray-700 hover:text-orange-600"
             }`}
           >
             Services
           </button>
           <button
             onClick={() => scrollToSection("portfolio")}
-            className={`font-semibold transition-colors hover:text-orange-500 ${
-              isDarkMode ? "text-gray-300" : "text-gray-700"
+            className={`font-semibold transition-all duration-300 hover:scale-105 hover:text-orange-500 ${
+              isDarkMode
+                ? "text-gray-200 hover:text-orange-400"
+                : "text-gray-700 hover:text-orange-600"
             }`}
           >
             Portfolio
           </button>
           <button
             onClick={() => scrollToSection("contact")}
-            className={`font-semibold transition-colors hover:text-orange-500 ${
-              isDarkMode ? "text-gray-300" : "text-gray-700"
+            className={`font-semibold transition-all duration-300 hover:scale-105 hover:text-orange-500 ${
+              isDarkMode
+                ? "text-gray-200 hover:text-orange-400"
+                : "text-gray-700 hover:text-orange-600"
             }`}
           >
             Contact
@@ -112,8 +393,8 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
         <div className="hidden gap-6 md:flex">
           <button
             onClick={handleDarkModeToggle}
-            className={`transition-all duration-300 ${
-              !isRotating ? "hover:scale-105" : ""
+            className={`cursor-pointer rounded-full p-2 backdrop-blur-md transition-all duration-300 ${
+              !isRotating ? "hover:scale-110" : ""
             } ${
               isDarkMode
                 ? "text-white hover:text-yellow-300"
@@ -122,29 +403,29 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
           >
             {isDarkMode ? (
               <Sun
-                size={24}
+                size={20}
                 className="transition-transform duration-300"
               />
             ) : (
               <Moon
-                size={24}
+                size={20}
                 className="transition-transform duration-300"
               />
             )}
           </button>
           <button
             onClick={() => scrollToSection("contact")}
-            className="transform rounded-[10px] bg-[#2563EB] px-6 py-2 font-semibold text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-[#1d4ed8] hover:shadow-xl"
+            className="transform rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 font-semibold text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-blue-800 hover:shadow-xl hover:shadow-blue-500/25"
           >
             Get Started
           </button>
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile Actions */}
         <div className="flex items-center space-x-4 md:hidden">
           <button
             onClick={handleDarkModeToggle}
-            className={`transition-all duration-300 ${
+            className={`rounded-full p-2 backdrop-blur-md transition-all duration-300 ${
               !isRotating ? "hover:scale-110" : ""
             } ${
               isDarkMode
@@ -154,28 +435,30 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
           >
             {isDarkMode ? (
               <Sun
-                size={20}
+                size={28}
                 className="transition-transform duration-300"
               />
             ) : (
               <Moon
-                size={20}
+                size={28}
                 className="transition-transform duration-300"
               />
             )}
           </button>
           <button
             onClick={toggleMenu}
-            className={`p-2 transition-all duration-300 hover:scale-110 ${isDarkMode ? "text-white" : "text-gray-900"}`}
+            className={`rounded-full p-2 backdrop-blur-md transition-all duration-300 hover:scale-110 ${
+              isDarkMode ? "text-white" : "text-gray-900"
+            }`}
           >
             {isMenuOpen ? (
               <X
-                size={24}
+                size={28}
                 className="transition-transform duration-300"
               />
             ) : (
               <Menu
-                size={24}
+                size={28}
                 className="transition-transform duration-300"
               />
             )}
@@ -183,20 +466,22 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Enhanced Mobile Menu */}
       {isMenuOpen && (
         <div
-          className={`mt-4 transform pb-4 backdrop-blur-md transition-all duration-300 ease-out md:hidden ${
-            isDarkMode ? "bg-gray-800/20" : "bg-white/10"
-          } rounded-2xl border border-white/20 shadow-xl`}
+          className={`mt-4 transform rounded-2xl border shadow-2xl backdrop-blur-xl transition-all duration-300 ease-out md:hidden ${
+            isDarkMode
+              ? "border-white/20 bg-gradient-to-br from-gray-900/80 via-gray-800/60 to-gray-900/80 shadow-black/50"
+              : "border-gray-200/30 bg-gradient-to-br from-white/80 via-white/60 to-white/80 shadow-gray-400/30"
+          }`}
         >
-          <div className="flex flex-col space-y-4 px-4 py-4">
+          <div className="flex flex-col space-y-4 px-6 py-6">
             <button
               onClick={() => scrollToSection("home")}
-              className={`text-left font-semibold transition-colors hover:text-orange-500 ${
+              className={`text-left font-semibold transition-all duration-300 hover:translate-x-2 hover:scale-105 hover:text-orange-500 ${
                 isDarkMode
-                  ? "text-gray-300"
-                  : "text-gray-700"
+                  ? "text-gray-200 hover:text-orange-400"
+                  : "text-gray-700 hover:text-orange-600"
               }`}
             >
               Home
@@ -204,40 +489,40 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
 
             <button
               onClick={() => scrollToSection("about")}
-              className={`text-left font-semibold transition-colors hover:text-orange-500 ${
+              className={`text-left font-semibold transition-all duration-300 hover:translate-x-2 hover:scale-105 hover:text-orange-500 ${
                 isDarkMode
-                  ? "text-gray-300"
-                  : "text-gray-700"
+                  ? "text-gray-200 hover:text-orange-400"
+                  : "text-gray-700 hover:text-orange-600"
               }`}
             >
               About
             </button>
             <button
               onClick={() => scrollToSection("services")}
-              className={`text-left font-semibold transition-colors hover:text-orange-500 ${
+              className={`text-left font-semibold transition-all duration-300 hover:translate-x-2 hover:scale-105 hover:text-orange-500 ${
                 isDarkMode
-                  ? "text-gray-300"
-                  : "text-gray-700"
+                  ? "text-gray-200 hover:text-orange-400"
+                  : "text-gray-700 hover:text-orange-600"
               }`}
             >
               Services
             </button>
             <button
               onClick={() => scrollToSection("portfolio")}
-              className={`text-left font-semibold transition-colors hover:text-orange-500 ${
+              className={`text-left font-semibold transition-all duration-300 hover:translate-x-2 hover:scale-105 hover:text-orange-500 ${
                 isDarkMode
-                  ? "text-gray-300"
-                  : "text-gray-700"
+                  ? "text-gray-200 hover:text-orange-400"
+                  : "text-gray-700 hover:text-orange-600"
               }`}
             >
               Portfolio
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className={`text-left font-semibold transition-colors hover:text-orange-500 ${
+              className={`text-left font-semibold transition-all duration-300 hover:translate-x-2 hover:scale-105 hover:text-orange-500 ${
                 isDarkMode
-                  ? "text-gray-300"
-                  : "text-gray-700"
+                  ? "text-gray-200 hover:text-orange-400"
+                  : "text-gray-700 hover:text-orange-600"
               }`}
             >
               Contact
@@ -246,7 +531,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
             {/* Mobile Get Started Button */}
             <button
               onClick={() => scrollToSection("contact")}
-              className="mt-4 transform rounded-[10px] bg-[#2563EB] px-6 py-2 font-semibold text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-[#1d4ed8] hover:shadow-xl"
+              className="mt-4 transform rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 font-semibold text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-blue-800 hover:shadow-xl hover:shadow-blue-500/25"
             >
               Get Started
             </button>

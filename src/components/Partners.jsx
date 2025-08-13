@@ -395,7 +395,8 @@ import Marquee from "react-fast-marquee";
 const Partners = ({ partners, partnersLoading }) => {
   return (
     <section className="transition-colors duration-300">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"> */}
+      <div className="mx-auto max-w-7xl">
         {partnersLoading ? (
           // Loading State
           <div className="py-12 text-center">
@@ -447,7 +448,7 @@ const Partners = ({ partners, partnersLoading }) => {
           </div>
         ) : (
           // Single Row Marquee - Very Slow
-          <div className="py-8">
+          <div className="py-4">
             <Marquee
               gradient={false}
               speed={15}
@@ -499,7 +500,7 @@ const PartnerLogo = ({ partner }) => {
 
   const LogoContent = () => (
     <div className="group mx-6 flex items-center justify-center">
-      <div className="relative flex h-16 w-36 cursor-pointer items-center justify-center rounded-[10px] bg-transparent p-4 backdrop-blur-sm transition-all duration-300">
+      <div className="relative flex h-16 w-36 cursor-pointer items-center justify-center rounded-[10px] bg-transparent p-4 transition-all duration-300">
         {/* <div className="relative flex h-16 w-36 cursor-pointer items-center justify-center rounded-[10px] bg-transparent p-4 backdrop-blur-sm transition-all duration-300 dark:border dark:border-white/20 dark:bg-white/15 dark:backdrop-blur-sm"> */}
         <div className="relative z-10 flex h-full w-full items-center justify-center">
           {imageUrl ? (
@@ -543,7 +544,7 @@ const PartnerLogo = ({ partner }) => {
         </div>
 
         {/* Soft shadow behind card */}
-        <div className="absolute inset-0 -z-10 scale-95 transform rounded-[10px] bg-white/20 opacity-0 blur-md transition-all duration-300 group-hover:scale-100 group-hover:opacity-60 dark:bg-white/20"></div>
+        <div className="absolute inset-0 -z-10 scale-95 transform rounded-[10px] bg-white/20 opacity-0 blur-md transition-all duration-300 dark:bg-white/20"></div>
       </div>
     </div>
   );

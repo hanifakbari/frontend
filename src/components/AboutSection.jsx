@@ -92,7 +92,7 @@ const AboutSection = ({ data, isDarkMode }) => {
           {subtitle && (
             <div className="mb-4 md:mb-6">
               <span
-                className={`inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-medium tracking-wide uppercase backdrop-blur-sm transition-colors duration-300 sm:px-4 sm:py-2 sm:text-sm ${
+                className={`inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-medium uppercase tracking-wide backdrop-blur-sm transition-colors duration-300 sm:px-4 sm:py-2 sm:text-sm ${
                   isDarkMode
                     ? "border-blue-500/30 bg-gradient-to-r from-blue-500/20 via-orange-500/20 to-yellow-500/20 text-blue-200"
                     : "border-blue-300/40 bg-gradient-to-r from-blue-100/80 via-orange-100/60 to-yellow-100/80 text-blue-700"
@@ -111,7 +111,7 @@ const AboutSection = ({ data, isDarkMode }) => {
           )}
 
           <h2
-            className={`font-dosis mb-6 text-3xl leading-tight font-bold transition-all duration-300 sm:text-4xl md:mb-8 md:text-5xl lg:text-6xl ${
+            className={`mb-6 font-dosis text-3xl font-bold leading-tight transition-all duration-300 sm:text-4xl md:mb-8 md:text-5xl lg:text-6xl ${
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
           >
@@ -132,7 +132,7 @@ const AboutSection = ({ data, isDarkMode }) => {
               {description.map((block, index) => (
                 <p
                   key={index}
-                  className={`text-lg leading-relaxed font-light transition-colors duration-300 md:text-xl ${
+                  className={`text-lg font-light leading-relaxed transition-colors duration-300 md:text-xl ${
                     isDarkMode
                       ? "text-gray-300"
                       : "text-gray-600"
@@ -155,7 +155,8 @@ const AboutSection = ({ data, isDarkMode }) => {
               <div
                 className={`group cursor-pointer rounded-2xl border p-8 text-center backdrop-blur-sm transition-all duration-300 hover:shadow-md ${
                   isDarkMode
-                    ? "border-gray-700/30 bg-gray-900/20 hover:border-gray-600/50 hover:bg-gray-800/30"
+                    ? // ? "border-gray-700/30 bg-gray-900/20 hover:border-gray-600/50 hover:bg-gray-800/30"
+                      "border-white/10 bg-white/[4%] shadow-black/20 hover:border-white/20 hover:bg-white/10"
                     : "border-gray-300/30 bg-white/20 hover:border-gray-400/50 hover:bg-white/40"
                 }`}
               >
@@ -204,7 +205,8 @@ const AboutSection = ({ data, isDarkMode }) => {
               <div
                 className={`group cursor-pointer rounded-2xl border p-8 text-center backdrop-blur-sm transition-all duration-300 hover:shadow-md ${
                   isDarkMode
-                    ? "border-gray-700/30 bg-gray-900/20 hover:border-gray-600/50 hover:bg-gray-800/30"
+                    ? // ? "border-gray-700/30 bg-gray-900/20 hover:border-gray-600/50 hover:bg-gray-800/30"
+                      "border-white/10 bg-white/[4%] shadow-black/20 hover:border-white/20 hover:bg-white/10"
                     : "border-gray-300/30 bg-white/20 hover:border-gray-400/50 hover:bg-white/40"
                 }`}
               >

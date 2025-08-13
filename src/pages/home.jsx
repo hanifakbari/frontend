@@ -1,5 +1,5 @@
 import {
-  // useEffect,
+  useEffect,
   useState,
   // useCallback,
   // useRef,
@@ -14,10 +14,10 @@ import ContactSection from "../components/ContactForm";
 import Footer from "../components/Footer";
 
 const Home = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
   // const [home, setHome] = useState(null);
   // const [loading, setLoading] = useState(true);
   // const [error, setError] = useState(null);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   // const [retryCount, setRetryCount] = useState(0);
 
   // const [isMonitoring, setIsMonitoring] = useState(false);
@@ -197,41 +197,41 @@ const Home = () => {
   //   [startMonitoring]
   // );
 
-  // useEffect(() => {
-  //   const initializeDarkMode = () => {
-  //     const savedTheme = localStorage.getItem("theme");
-  //     const prefersDark = window.matchMedia(
-  //       "(prefers-color-scheme: dark)"
-  //     ).matches;
+  useEffect(() => {
+    const initializeDarkMode = () => {
+      const savedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
 
-  //     const shouldBeDark =
-  //       savedTheme === "dark" ||
-  //       (!savedTheme && prefersDark);
-  //     setIsDarkMode(shouldBeDark);
+      const shouldBeDark =
+        savedTheme === "dark" ||
+        (!savedTheme && prefersDark);
+      setIsDarkMode(shouldBeDark);
 
-  //     if (shouldBeDark) {
-  //       document.documentElement.classList.add("dark");
-  //     } else {
-  //       document.documentElement.classList.remove("dark");
-  //     }
-  //   };
+      if (shouldBeDark) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    };
 
-  //   initializeDarkMode();
-  //   loadData();
+    initializeDarkMode();
+    // loadData();
 
-  //   return () => {
-  //     if (monitoringRef.current) {
-  //       clearInterval(monitoringRef.current);
-  //       monitoringRef.current = null;
-  //     }
-  //     if (timeoutRef.current) {
-  //       clearTimeout(timeoutRef.current);
-  //       timeoutRef.current = null;
-  //     }
-  //     setIsMonitoring(false);
-  //   };
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+    // return () => {
+    //   if (monitoringRef.current) {
+    //     clearInterval(monitoringRef.current);
+    //     monitoringRef.current = null;
+    //   }
+    //   if (timeoutRef.current) {
+    //     clearTimeout(timeoutRef.current);
+    //     timeoutRef.current = null;
+    //   }
+    //   setIsMonitoring(false);
+    // };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // useEffect(() => {
   //   if (
@@ -257,19 +257,6 @@ const Home = () => {
   //   startMonitoring,
   //   stopMonitoring,
   // ]);
-
-  const toggleDarkMode = () => {
-    const newDarkMode = !isDarkMode;
-    setIsDarkMode(newDarkMode);
-
-    if (newDarkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  };
 
   // const handleManualRefresh = () => {
   //   setRetryCount(0);
@@ -420,6 +407,19 @@ const Home = () => {
   //   );
   // }
 
+  const toggleDarkMode = () => {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+
+    if (newDarkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
+
   return (
     // <div
     //   className={`relative h-full overflow-hidden transition-colors duration-500 ${
@@ -445,21 +445,46 @@ const Home = () => {
     //       ? "bg-gradient-to-br from-slate-950 via-gray-900 to-zinc-950 text-slate-200"
     //       : "bg-gradient-to-br from-slate-50 via-blue-50 to-gray-100 text-slate-900"
     //   }`}
+    // <div
+    //   className={`relative h-full overflow-hidden transition-colors duration-500 ${
+    //     isDarkMode
+    //       ? "bg-gradient-to-br from-neutral-950 via-zinc-900 to-gray-950 text-neutral-200"
+    //       : "bg-gradient-to-br from-slate-50 via-blue-50 to-gray-100 text-slate-900"
+    //   }`}
+    // >
+    // <div
+    //   className={`relative h-full overflow-hidden transition-colors duration-500 ${
+    //     isDarkMode
+    //       ? "bg-gradient-to-br from-gray-900 via-slate-800 to-neutral-900 text-gray-100"
+    //       : "bg-gradient-to-br from-white via-gray-50 to-slate-100 text-gray-900"
+    //   }`}
+    // >
+    // <div
+    //   className={`relative h-full overflow-hidden transition-colors duration-500 ${
+    //     isDarkMode
+    //       ? "bg-gradient-to-br from-black via-gray-900 to-zinc-900 text-gray-200"
+    //       : "bg-gradient-to-br from-white via-gray-50 to-slate-100 text-gray-900"
+    //   }`}
+    // >
+    // <div
+    //   className={`relative h-full overflow-hidden transition-colors duration-500 ${
+    //     isDarkMode
+    //       ? "bg-gradient-to-br from-slate-950 via-gray-950 to-zinc-950 text-gray-100"
+    //       : "bg-gradient-to-br from-white via-gray-50 to-slate-100 text-gray-900"
+    //   }`}
+    // >
     <div
-      className={`relative h-full overflow-hidden transition-colors duration-500 ${
-        isDarkMode
-          ? "bg-gradient-to-br from-neutral-950 via-zinc-900 to-gray-950 text-neutral-200"
-          : "bg-gradient-to-br from-slate-50 via-blue-50 to-gray-100 text-slate-900"
-      }`}
+      // className={`relative h-full overflow-hidden bg-white transition-colors duration-500 dark:bg-[#0c0c0c]`}
+      className={`relative h-full overflow-hidden bg-white transition-colors duration-500 dark:bg-[#131313]`}
     >
       <div className="absolute inset-0 opacity-35">
-        <div
+        {/* <div
           className={`absolute inset-0 ${
             isDarkMode
               ? "via-purple-900/12 bg-gradient-to-br from-blue-900/20 to-cyan-900/20"
               : "bg-gradient-to-br from-blue-100/35 via-indigo-100/25 to-cyan-100/35"
           }`}
-        ></div>
+        ></div> */}
 
         <div
           className="absolute inset-0"
