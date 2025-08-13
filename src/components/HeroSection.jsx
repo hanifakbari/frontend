@@ -2495,8 +2495,8 @@
 import { useState, useEffect } from "react";
 import { fetchPartners } from "../utils/api";
 import Partners from "./Partners";
-import buildingHero from "../assets/images/building-hero.png";
-import buildingHeroLight from "../assets/images/building-hero-light.png";
+import buildingHero from "../assets/images/building-hero.webp";
+import buildingHeroLight from "../assets/images/building-hero-light.webp";
 
 const HeroSection = ({
   data,

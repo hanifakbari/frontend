@@ -68,6 +68,7 @@ module.exports = {
       backgroundImage: {
         // CSS custom properties untuk dynamic images
         "building-hero": "var(--building-hero-bg)",
+        "building-hero-light": "var(--building-hero-bg)",
 
         // Enhanced gradient backgrounds
         "hero-light":
