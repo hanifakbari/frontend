@@ -1,4 +1,10 @@
-const BASE_URL = "http://localhost:1337/api";
+// Get BASE_URL from environment variable or fallback to localhost for development
+const BASE_URL = `${process.env.REACT_APP_STRAPI_URL || "http://localhost:1337"}/api`;
+
+// Get base URL for images (without /api suffix)
+const IMAGE_BASE_URL =
+  process.env.REACT_APP_STRAPI_URL ||
+  "http://localhost:1337";
 
 /**
  * Fetch home page content with hero section and social links
@@ -121,7 +127,7 @@ export async function fetchPartner(id) {
  */
 export function getImageUrl(
   image,
-  baseUrl = "http://localhost:1337"
+  baseUrl = IMAGE_BASE_URL
 ) {
   if (!image) return null;
 
@@ -182,6 +188,8 @@ export async function testAllAPIs() {
   }
 
   console.log("🧪 Testing all API endpoints...");
+  console.log(`🌐 Using API Base URL: ${BASE_URL}`);
+  console.log(`🖼️ Using Image Base URL: ${IMAGE_BASE_URL}`);
 
   // Test home content
   console.log("\n📱 Testing Home API...");
@@ -213,7 +221,41 @@ export async function testAllAPIs() {
   console.log("\n🎉 API testing complete!");
 }
 
+/**
+ * Production helper - check API health
+ */
+export async function checkAPIHealth() {
+  try {
+    const res = await fetch(
+      `${BASE_URL.replace("/api", "")}/admin/init`
+    );
+
+    if (res.ok) {
+      console.log("✅ Strapi API is healthy");
+      return true;
+    } else {
+      console.log("⚠️ Strapi API returned non-200 status");
+      return false;
+    }
+  } catch (error) {
+    console.error(
+      "❌ Strapi API health check failed:",
+      error
+    );
+    return false;
+  }
+}
+
 // Export for browser console testing
 if (typeof window !== "undefined") {
   window.testAllAPIs = testAllAPIs;
+  window.checkAPIHealth = checkAPIHealth;
+
+  // Add debug info to window for production troubleshooting
+  window.strapiConfig = {
+    baseUrl: BASE_URL,
+    imageBaseUrl: IMAGE_BASE_URL,
+    environment: process.env.NODE_ENV,
+    strapiUrl: process.env.REACT_APP_STRAPI_URL,
+  };
 }
