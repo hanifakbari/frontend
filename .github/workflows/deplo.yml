@@ -1,0 +1,67 @@
+name: Deploy Frontend to Production
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test build
+        run: |
+          NODE_OPTIONS="--max-old-space-size=1536" npm run build
+          echo "Build successful"
+
+  deploy:
+    name: Deploy to Production
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            echo "Starting deployment..."
+            cd /var/www/astalintas.co.id/frontend
+
+            # Pull latest code
+            git fetch origin
+            git reset --hard origin/main
+
+            # Install dependencies
+            npm ci
+
+            # Build with memory optimization
+            NODE_OPTIONS="--max-old-space-size=1536" npm run build
+
+            # Deploy to public_html
+            rm -rf ../public_html/*
+            cp -r build/* ../public_html/
+
+            # Fix permissions
+            chown -R www-data:www-data ../public_html/
+            chmod -R 755 ../public_html/
+
+            echo "Deployment completed successfully"
