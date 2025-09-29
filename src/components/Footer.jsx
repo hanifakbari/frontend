@@ -1,13 +1,7 @@
-import React from "react";
 import {
   Mail,
   Phone,
   MapPin,
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Github,
   ArrowRight,
   Heart,
 } from "lucide-react";
@@ -69,33 +63,7 @@ const Footer = ({ data, isDarkMode = false }) => {
       //   { name: "GDPR Compliance", href: "/gdpr" },
       // ],
     },
-    social: [
-      {
-        name: "Facebook",
-        icon: Facebook,
-        href: "https://facebook.com/ptasta",
-      },
-      {
-        name: "Twitter",
-        icon: Twitter,
-        href: "https://twitter.com/ptasta",
-      },
-      {
-        name: "Instagram",
-        icon: Instagram,
-        href: "https://instagram.com/ptasta",
-      },
-      {
-        name: "LinkedIn",
-        icon: Linkedin,
-        href: "https://linkedin.com/company/ptasta",
-      },
-      {
-        name: "GitHub",
-        icon: Github,
-        href: "https://github.com/ptasta",
-      },
-    ],
+
     newsletter: {
       title: "Stay Updated",
       description:
@@ -104,37 +72,7 @@ const Footer = ({ data, isDarkMode = false }) => {
   };
 
   const footerData = data || defaultData;
-  const { company, contact, links, social, newsletter } =
-    footerData;
-
-  const [email, setEmail] = React.useState("");
-  const [isSubscribing, setIsSubscribing] =
-    React.useState(false);
-  const [subscribeSuccess, setSubscribeSuccess] =
-    React.useState(false);
-
-  const handleNewsletterSubmit = async (e) => {
-    e.preventDefault();
-    if (!email) return;
-
-    setIsSubscribing(true);
-
-    try {
-      await new Promise((resolve) =>
-        setTimeout(resolve, 1500)
-      );
-      setSubscribeSuccess(true);
-      setEmail("");
-      setTimeout(() => setSubscribeSuccess(false), 3000);
-    } catch (error) {
-      console.error(
-        "Newsletter subscription error:",
-        error
-      );
-    } finally {
-      setIsSubscribing(false);
-    }
-  };
+  const { company, contact, links } = footerData;
 
   const linkSections = [
     { title: "Services", links: links.services },
@@ -145,12 +83,12 @@ const Footer = ({ data, isDarkMode = false }) => {
     <footer className="relative bg-white/[1%] py-4 backdrop-blur-lg transition-colors duration-500">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
-          className={`absolute -top-10 -right-10 h-40 w-40 rounded-full opacity-20 blur-3xl ${
+          className={`absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-20 blur-3xl ${
             isDarkMode ? "bg-blue-500" : "bg-blue-400"
           }`}
         ></div>
         <div
-          className={`absolute top-1/2 -left-20 h-60 w-60 rounded-full opacity-10 blur-3xl ${
+          className={`absolute -left-20 top-1/2 h-60 w-60 rounded-full opacity-10 blur-3xl ${
             isDarkMode
               ? "bg-gradient-to-r from-orange-500 to-yellow-500"
               : "bg-gradient-to-r from-orange-400 to-yellow-400"
@@ -165,7 +103,7 @@ const Footer = ({ data, isDarkMode = false }) => {
 
       <div className="relative z-10">
         {/* Main Footer Content */}
-        <div className="mx-auto max-w-7xl px-4 pt-16 pb-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 pb-8 pt-16 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Company Info */}
             <div className="lg:col-span-1">
@@ -266,43 +204,8 @@ const Footer = ({ data, isDarkMode = false }) => {
                   </span>
                 </div>
               </div>
-
-              {/* Social Media */}
-              <div>
-                <h4
-                  className={`mb-4 text-sm font-semibold transition-colors duration-300 ${
-                    isDarkMode
-                      ? "text-white"
-                      : "text-gray-900"
-                  }`}
-                >
-                  Follow Us
-                </h4>
-                <div className="flex space-x-3">
-                  {social.map((item, index) => {
-                    const IconComponent = item.icon;
-                    return (
-                      <a
-                        key={index}
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`flex h-10 w-10 items-center justify-center rounded-lg transition-all duration-300 hover:scale-110 ${
-                          isDarkMode
-                            ? "border border-gray-700/30 bg-gray-800/50 text-gray-400 hover:bg-gradient-to-r hover:from-blue-500/20 hover:via-orange-500/20 hover:to-yellow-500/20 hover:text-blue-400"
-                            : "border border-gray-300/30 bg-white/50 text-gray-600 hover:bg-gradient-to-r hover:from-blue-500 hover:via-orange-500 hover:to-yellow-500 hover:text-white"
-                        }`}
-                        aria-label={item.name}
-                      >
-                        <IconComponent size={18} />
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
             </div>
 
-            {/* Newsletter & Links Combined */}
             <div className="space-y-8 lg:col-span-1">
               {/* Links Sections */}
               <div className="grid gap-8 sm:grid-cols-2">
@@ -343,89 +246,6 @@ const Footer = ({ data, isDarkMode = false }) => {
                     </ul>
                   </div>
                 ))}
-              </div>
-
-              {/* Newsletter */}
-              <div
-                className={`rounded-2xl border p-6 backdrop-blur-sm transition-all duration-300 ${
-                  isDarkMode
-                    ? "border-gray-700/30 bg-gray-900/20"
-                    : "border-gray-300/30 bg-white/20"
-                }`}
-              >
-                <h4
-                  className={`mb-2 text-lg font-semibold transition-colors duration-300 ${
-                    isDarkMode
-                      ? "text-white"
-                      : "text-gray-900"
-                  }`}
-                >
-                  {newsletter.title}
-                </h4>
-                <p
-                  className={`mb-4 text-sm transition-colors duration-300 ${
-                    isDarkMode
-                      ? "text-gray-400"
-                      : "text-gray-600"
-                  }`}
-                >
-                  {newsletter.description}
-                </p>
-
-                {subscribeSuccess ? (
-                  <div
-                    className={`rounded-lg border p-3 text-center ${
-                      isDarkMode
-                        ? "border-green-500/30 bg-green-500/10 text-green-400"
-                        : "border-green-300 bg-green-50 text-green-700"
-                    }`}
-                  >
-                    <span className="text-sm font-medium">
-                      Thanks for subscribing!
-                    </span>
-                  </div>
-                ) : (
-                  <form
-                    onSubmit={handleNewsletterSubmit}
-                    className="space-y-3"
-                  >
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) =>
-                        setEmail(e.target.value)
-                      }
-                      placeholder="Your email address"
-                      className={`w-full rounded-lg border px-3 py-2 text-sm transition-all duration-300 focus:ring-2 focus:outline-none ${
-                        isDarkMode
-                          ? "border-gray-600/30 bg-gray-800/50 text-white placeholder-gray-400 focus:border-blue-500/50 focus:ring-blue-500/50"
-                          : "border-gray-300/50 bg-white/50 text-gray-900 placeholder-gray-500 focus:border-blue-500/50 focus:ring-blue-500/50"
-                      }`}
-                      required
-                    />
-                    <button
-                      type="submit"
-                      disabled={isSubscribing}
-                      className={`flex w-full items-center justify-center space-x-2 rounded-lg px-4 py-2 text-sm font-semibold text-white transition-all duration-300 ${
-                        isSubscribing
-                          ? "cursor-not-allowed bg-gray-400"
-                          : "bg-gradient-to-r from-blue-600 via-blue-600 to-blue-700 hover:scale-[1.02] hover:from-blue-500 hover:via-orange-500 hover:to-yellow-500 focus:ring-2 focus:ring-blue-500/50 focus:outline-none"
-                      }`}
-                    >
-                      {isSubscribing ? (
-                        <>
-                          <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-                          <span>Subscribing...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Mail size={16} />
-                          <span>Subscribe</span>
-                        </>
-                      )}
-                    </button>
-                  </form>
-                )}
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 // Get BASE_URL from environment variable or fallback to localhost for development
 const BASE_URL = `${process.env.REACT_APP_STRAPI_URL || "http://localhost:1337"}/api`;
-
+console.log("API Base URL:", BASE_URL);
 // Get base URL for images (without /api suffix)
 const IMAGE_BASE_URL =
   process.env.REACT_APP_STRAPI_URL ||
@@ -9,27 +9,68 @@ const IMAGE_BASE_URL =
 /**
  * Fetch home page content with hero section and social links
  */
-export async function fetchHomeContent() {
+export const fetchHeroSection = async () => {
   try {
     const res = await fetch(
-      `${BASE_URL}/home?populate[hero][populate][0]=image&populate[hero][populate][1]=social_links.icon`
+      `${BASE_URL}/hero-section?populate=*`
     );
-
     if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
+      const errText = await res.text();
+      throw new Error(
+        `Failed to fetch hero section: ${res.status} ${errText}`
+      );
     }
+    const data = await res.json();
 
-    const json = await res.json();
-    console.log("Home API response:", json);
-    return json.data;
-  } catch (error) {
-    console.error(
-      "❌ Failed to fetch home content:",
-      error
+    const heroData = data.data;
+    if (!heroData) return null;
+
+    // Function to extract text from rich text description
+    const extractDescriptionText = (description) => {
+      if (!description) return "";
+
+      if (typeof description === "string") {
+        return description;
+      }
+
+      if (Array.isArray(description)) {
+        return description
+          .map((block) => {
+            if (block.children) {
+              return block.children
+                .map((child) => child.text || "")
+                .join("");
+            }
+            return "";
+          })
+          .join(" ")
+          .trim();
+      }
+
+      return "";
+    };
+
+    const processedDescription = extractDescriptionText(
+      heroData.description
     );
+
+    const hasContent =
+      heroData.title ||
+      heroData.subtitle ||
+      processedDescription;
+
+    if (!hasContent) return null;
+
+    return {
+      title: heroData.title || "",
+      subtitle: heroData.subtitle || "",
+      description: processedDescription,
+    };
+  } catch (error) {
+    console.error("Error fetching hero section:", error);
     return null;
   }
-}
+};
 
 /**
  * Submit contact form data to Strapi
@@ -58,7 +99,7 @@ export async function submitContactForm(data) {
       "❌ Failed to submit contact form:",
       error
     );
-    throw error; // Re-throw so component can handle it
+    throw error;
   }
 }
 
@@ -177,6 +218,337 @@ export function isValidUrl(url) {
 }
 
 /**
+ * Fetch About section data from Strapi
+ */
+export const fetchAboutSection = async () => {
+  try {
+    const res = await fetch(
+      `${BASE_URL}/about-sections?populate[vision]=*&populate[mission]=*&populate[commitments]=*`
+    );
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(
+        `Failed to fetch about section: ${res.status} ${errText}`
+      );
+    }
+    const data = await res.json();
+
+    // Get first item from array (since it's a collection)
+    const aboutData = data.data?.[0];
+    if (!aboutData) return null;
+
+    // Process description if it's rich text
+    let processedDescription = aboutData.description;
+    if (Array.isArray(aboutData.description)) {
+      processedDescription = aboutData.description;
+    }
+
+    const result = {
+      title: aboutData.title || "",
+      subtitle: aboutData.subtitle || "",
+      description: processedDescription,
+      vision: aboutData.vision
+        ? {
+            title: aboutData.vision.title || "",
+            description: aboutData.vision.description || "",
+          }
+        : null,
+      mission: aboutData.mission
+        ? {
+            title: aboutData.mission.title || "",
+            description:
+              aboutData.mission.description || "",
+          }
+        : null,
+      commitments:
+        aboutData.commitments &&
+        Array.isArray(aboutData.commitments)
+          ? aboutData.commitments.map((commitment) => ({
+              title: commitment.title || "",
+              description: commitment.description || "",
+              icon: commitment.icon || "check",
+            }))
+          : [],
+    };
+
+    return result;
+  } catch (error) {
+    console.error("Error fetching about section:", error);
+    return null;
+  }
+};
+
+/**
+ * Fetch Solutions section data from Strapi
+ */
+export const fetchSolutionsSection = async () => {
+  try {
+    const res = await fetch(
+      `${BASE_URL}/solutions-sections?populate[businessLines]=*`
+    );
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(
+        `Failed to fetch solutions section: ${res.status} ${errText}`
+      );
+    }
+    const data = await res.json();
+
+    // Get first item from array (since it's a collection)
+    const solutionsData = data.data?.[0];
+    if (!solutionsData) return null;
+
+    // Function to extract text from rich text
+    const extractRichText = (richTextArray) => {
+      if (!richTextArray) return "";
+
+      if (typeof richTextArray === "string") {
+        return richTextArray;
+      }
+
+      if (Array.isArray(richTextArray)) {
+        return richTextArray
+          .map((block) => {
+            if (block.children) {
+              return block.children
+                .map((child) => child.text || "")
+                .join("");
+            }
+            return "";
+          })
+          .join(" ")
+          .trim();
+      }
+
+      return "";
+    };
+
+    const result = {
+      title: solutionsData.title || "",
+      subtitle: solutionsData.subtitle || "",
+      description: solutionsData.description || [],
+      businessLines:
+        solutionsData.businessLines &&
+        Array.isArray(solutionsData.businessLines)
+          ? solutionsData.businessLines.map((line) => ({
+              id: line.id || 0,
+              title: line.title || "",
+              description:
+                extractRichText(line.description) ||
+                line.description ||
+                "",
+              icon: line.icon || "code",
+              color: line.color || "blue",
+              features:
+                line.features &&
+                Array.isArray(line.features)
+                  ? line.features.map(
+                      (feature) => feature.name || feature
+                    )
+                  : [],
+            }))
+          : [],
+    };
+
+    return result;
+  } catch (error) {
+    console.error(
+      "Error fetching solutions section:",
+      error
+    );
+    return null;
+  }
+};
+
+/**
+ * Fetch Portfolio section data from Strapi
+ */
+export const fetchPortfolioSection = async () => {
+  try {
+    const res = await fetch(
+      `${BASE_URL}/portfolio-sections?populate[projects][populate]=image`
+    );
+
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(
+        `Failed to fetch portfolio section: ${res.status} ${errText}`
+      );
+    }
+
+    const data = await res.json();
+
+    // Get first item from array (since it's a collection)
+    const portfolioData = data.data?.[0];
+    if (!portfolioData) return null;
+
+    // Function to get image URL from Strapi format
+    const getImageUrl = (image) => {
+      if (!image) return null;
+
+      // If image is string (direct URL)
+      if (typeof image === "string") {
+        return image.startsWith("http")
+          ? image
+          : `${BASE_URL.replace("/api", "")}${image}`;
+      }
+
+      // Format Strapi v4: Direct object dengan url property
+      if (image.url) {
+        const baseUrl = BASE_URL.replace("/api", ""); // Remove /api from base URL
+        return image.url.startsWith("http")
+          ? image.url
+          : `${baseUrl}${image.url}`;
+      }
+
+      // Format lama: Nested data.attributes (backup)
+      if (
+        image.data &&
+        image.data.attributes &&
+        image.data.attributes.url
+      ) {
+        const url = image.data.attributes.url;
+        const baseUrl = BASE_URL.replace("/api", ""); // Remove /api from base URL
+        return url.startsWith("http")
+          ? url
+          : `${baseUrl}${url}`;
+      }
+
+      console.log("Unknown image format:", image);
+      return null;
+    };
+
+    // Function to extract text from rich text
+    const extractRichText = (richTextArray) => {
+      if (!richTextArray) return "";
+
+      if (typeof richTextArray === "string") {
+        return richTextArray;
+      }
+
+      if (Array.isArray(richTextArray)) {
+        return richTextArray
+          .map((block) => {
+            if (block.children) {
+              return block.children
+                .map((child) => child.text || "")
+                .join("");
+            }
+            return "";
+          })
+          .join(" ")
+          .trim();
+      }
+
+      return "";
+    };
+
+    const result = {
+      title: portfolioData.title || "",
+      subtitle: portfolioData.subtitle || "",
+      description:
+        extractRichText(portfolioData.description) ||
+        portfolioData.description ||
+        "",
+      projects:
+        portfolioData.projects &&
+        Array.isArray(portfolioData.projects)
+          ? portfolioData.projects.map((project) => {
+              const imageUrl = getImageUrl(project.image);
+
+              // Debug log untuk cek image
+              if (project.image) {
+                console.log(
+                  "Processing project image:",
+                  project.image
+                );
+                console.log(
+                  "Generated image URL:",
+                  imageUrl
+                );
+              }
+
+              return {
+                id: project.id || 0,
+                title: project.title || "",
+                description:
+                  extractRichText(project.description) ||
+                  project.description ||
+                  "",
+                category: project.category || "",
+                duration: project.duration || "",
+                teamSize: project.teamSize || "",
+                statuss: project.statuss || "completed",
+                completedDate: project.completedDate || "",
+                image: imageUrl,
+                technologies:
+                  project.technologies &&
+                  Array.isArray(project.technologies)
+                    ? project.technologies.map(
+                        (tech) => tech.name || tech
+                      )
+                    : [],
+                keyResults:
+                  project.keyResults &&
+                  Array.isArray(project.keyResults)
+                    ? project.keyResults.map((result) => ({
+                        title: result.title || "",
+                        description:
+                          result.description || "",
+                      }))
+                    : [],
+              };
+            })
+          : [],
+    };
+
+    console.log("Final processed result:", result);
+    return result;
+  } catch (error) {
+    console.error(
+      "Error fetching portfolio section:",
+      error
+    );
+    return null;
+  }
+};
+
+/**
+ * Development helper - test hero section API specifically
+ */
+export async function testHeroSectionAPI() {
+  console.log(
+    "🧪 Testing Hero Section API specifically..."
+  );
+  console.log(
+    `🌐 Using API URL: ${BASE_URL}/hero-section?populate=*`
+  );
+
+  try {
+    const data = await fetchHeroSection();
+    console.log(
+      "📊 Hero Section Test Result:",
+      data ? "✅ Success" : "❌ Failed"
+    );
+
+    if (data) {
+      console.log("📝 Retrieved fields:", {
+        hasTitle: !!data.title,
+        hasSubtitle: !!data.subtitle,
+        hasDescription: !!data.description,
+        title: data.title || "(empty)",
+        subtitle: data.subtitle || "(empty)",
+        description: data.description
+          ? `${data.description.substring(0, 50)}...`
+          : "(empty)",
+      });
+    }
+  } catch (error) {
+    console.error("❌ Hero Section test failed:", error);
+  }
+}
+
+/**
  * Development helper - test all API endpoints
  */
 export async function testAllAPIs() {
@@ -191,13 +563,8 @@ export async function testAllAPIs() {
   console.log(`🌐 Using API Base URL: ${BASE_URL}`);
   console.log(`🖼️ Using Image Base URL: ${IMAGE_BASE_URL}`);
 
-  // Test home content
-  console.log("\n📱 Testing Home API...");
-  const homeData = await fetchHomeContent();
-  console.log(
-    "Home result:",
-    homeData ? "✅ Success" : "❌ Failed"
-  );
+  // Test hero section specifically
+  await testHeroSectionAPI();
 
   // Test partners
   console.log("\n🤝 Testing Partners API...");
@@ -249,6 +616,7 @@ export async function checkAPIHealth() {
 // Export for browser console testing
 if (typeof window !== "undefined") {
   window.testAllAPIs = testAllAPIs;
+  window.testHeroSectionAPI = testHeroSectionAPI;
   window.checkAPIHealth = checkAPIHealth;
 
   // Add debug info to window for production troubleshooting

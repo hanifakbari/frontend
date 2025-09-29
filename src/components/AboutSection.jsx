@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   CheckCircle,
   Users,
@@ -8,8 +9,14 @@ import {
   Heart,
   Handshake,
 } from "lucide-react";
+import { fetchAboutSection } from "../utils/api";
 
-const AboutSection = ({ data, isDarkMode }) => {
+const AboutSection = ({ isDarkMode }) => {
+  const [aboutData, setAboutData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Default fallback data
   const defaultData = {
     title: "About Our Company",
     subtitle: "Who We Are",
@@ -26,13 +33,11 @@ const AboutSection = ({ data, isDarkMode }) => {
       title: "Our Vision",
       description:
         "Menjadi salah satu perusahaan konsultan IT, Komunikasi dan system integrator teknologi informasi yang termuka dan profitable di Indonesia",
-      icon: "eye",
     },
     mission: {
       title: "Our Mission",
       description:
         "Menjadi perusahaan penyedia jasa teknologi informasi terkemuka di Indonesia untuk berkontribusi bagi kemajuan bangsa",
-      icon: "compass",
     },
     commitments: [
       {
@@ -56,15 +61,59 @@ const AboutSection = ({ data, isDarkMode }) => {
     ],
   };
 
-  const aboutData = data || defaultData;
-  const {
-    title,
-    subtitle,
-    description,
-    vision,
-    mission,
-    commitments,
-  } = aboutData;
+  useEffect(() => {
+    const loadAboutData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const data = await fetchAboutSection();
+
+        if (data) {
+          setAboutData(data);
+        } else {
+          setAboutData(defaultData);
+          setError(
+            "No data returned from CMS - using default content"
+          );
+        }
+      } catch (err) {
+        console.error("Error loading about section:", err);
+        setAboutData(defaultData);
+        setError(`API Error: ${err.message}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadAboutData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Retry function
+  const retryLoad = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const data = await fetchAboutSection();
+
+      if (data) {
+        setAboutData(data);
+      } else {
+        setAboutData(defaultData);
+        setError(
+          "No data returned from CMS - using default content"
+        );
+      }
+    } catch (err) {
+      console.error("Retry error:", err);
+      setAboutData(defaultData);
+      setError(`API Error: ${err.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Icon mapping
   const getIcon = (iconName) => {
@@ -81,11 +130,70 @@ const AboutSection = ({ data, isDarkMode }) => {
     return icons[iconName] || CheckCircle;
   };
 
+  // Loading state
+  if (loading) {
+    return (
+      <section
+        id="about"
+        className="relative py-20 transition-colors duration-500"
+      >
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-center py-20">
+            <div
+              className={`h-12 w-12 animate-spin rounded-full border-b-2 ${
+                isDarkMode
+                  ? "border-white"
+                  : "border-gray-900"
+              }`}
+            ></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Use data (from API or fallback)
+  const {
+    title,
+    subtitle,
+    description,
+    vision,
+    mission,
+    commitments,
+  } = aboutData;
+
   return (
     <section
       id="about"
       className="relative py-20 transition-colors duration-500"
     >
+      {/* Error indicator */}
+      {error && (
+        <div
+          className={`fixed right-4 top-20 z-50 max-w-sm rounded-lg p-3 text-sm ${
+            isDarkMode
+              ? "border border-yellow-700 bg-yellow-900/80 text-yellow-200"
+              : "border border-yellow-300 bg-yellow-100 text-yellow-800"
+          }`}
+        >
+          <div className="flex items-center justify-between">
+            <span className="text-xs">
+              CMS Connection Issue
+            </span>
+            <button
+              onClick={retryLoad}
+              className="ml-2 text-xs underline hover:no-underline"
+              disabled={loading}
+            >
+              {loading ? "..." : "Retry"}
+            </button>
+          </div>
+          <p className="mt-1 text-xs opacity-75">
+            Using default content
+          </p>
+        </div>
+      )}
+
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="mb-16 text-center lg:mb-20">
@@ -127,22 +235,37 @@ const AboutSection = ({ data, isDarkMode }) => {
             }`}
           ></div>
 
-          {Array.isArray(description) && (
+          {/* Description - handle both array and processed description */}
+          {description && (
             <div className="mx-auto max-w-3xl">
-              {description.map((block, index) => (
+              {Array.isArray(description) ? (
+                // Rich text format from Strapi
+                description.map((block, index) => (
+                  <p
+                    key={index}
+                    className={`text-lg font-light leading-relaxed transition-colors duration-300 md:text-xl ${
+                      isDarkMode
+                        ? "text-gray-300"
+                        : "text-gray-600"
+                    }`}
+                  >
+                    {block.children
+                      ?.map((child) => child.text)
+                      .join("")}
+                  </p>
+                ))
+              ) : (
+                // Processed string format
                 <p
-                  key={index}
                   className={`text-lg font-light leading-relaxed transition-colors duration-300 md:text-xl ${
                     isDarkMode
                       ? "text-gray-300"
                       : "text-gray-600"
                   }`}
                 >
-                  {block.children
-                    ?.map((child) => child.text)
-                    .join("")}
+                  {description}
                 </p>
-              ))}
+              )}
             </div>
           )}
         </div>
@@ -155,8 +278,7 @@ const AboutSection = ({ data, isDarkMode }) => {
               <div
                 className={`group cursor-pointer rounded-2xl border p-8 text-center backdrop-blur-sm transition-all duration-300 hover:shadow-md ${
                   isDarkMode
-                    ? // ? "border-gray-700/30 bg-gray-900/20 hover:border-gray-600/50 hover:bg-gray-800/30"
-                      "border-white/10 bg-white/[4%] shadow-black/20 hover:border-white/20 hover:bg-white/10"
+                    ? "border-white/10 bg-white/[4%] shadow-black/20 hover:border-white/20 hover:bg-white/10"
                     : "border-gray-300/30 bg-white/20 hover:border-gray-400/50 hover:bg-white/40"
                 }`}
               >
@@ -201,16 +323,15 @@ const AboutSection = ({ data, isDarkMode }) => {
               </div>
             )}
 
+            {/* Mission */}
             {mission && (
               <div
                 className={`group cursor-pointer rounded-2xl border p-8 text-center backdrop-blur-sm transition-all duration-300 hover:shadow-md ${
                   isDarkMode
-                    ? // ? "border-gray-700/30 bg-gray-900/20 hover:border-gray-600/50 hover:bg-gray-800/30"
-                      "border-white/10 bg-white/[4%] shadow-black/20 hover:border-white/20 hover:bg-white/10"
+                    ? "border-white/10 bg-white/[4%] shadow-black/20 hover:border-white/20 hover:bg-white/10"
                     : "border-gray-300/30 bg-white/20 hover:border-gray-400/50 hover:bg-white/40"
                 }`}
               >
-                {/* Mission Icon */}
                 <div
                   className={`mx-auto mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl transition-all duration-300 ${
                     isDarkMode
@@ -255,7 +376,7 @@ const AboutSection = ({ data, isDarkMode }) => {
         </div>
 
         {/* Company Commitments Section */}
-        {commitments && (
+        {commitments && commitments.length > 0 && (
           <div className="mb-20">
             <div className="mb-12 text-center">
               <h3
@@ -310,16 +431,6 @@ const AboutSection = ({ data, isDarkMode }) => {
                       dark: "bg-gradient-to-br from-yellow-600/5 to-yellow-400/5",
                       light:
                         "bg-gradient-to-br from-yellow-500/5 to-yellow-300/5",
-                    },
-                  },
-                  {
-                    dark: "bg-green-500/20 text-green-400 group-hover:bg-green-500/30",
-                    light:
-                      "bg-green-100/80 text-green-600 group-hover:bg-green-200/80",
-                    overlay: {
-                      dark: "bg-gradient-to-br from-green-600/5 to-green-400/5",
-                      light:
-                        "bg-gradient-to-br from-green-500/5 to-green-300/5",
                     },
                   },
                 ];
