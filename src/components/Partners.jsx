@@ -8,7 +8,7 @@ const Partners = ({ partners, partnersLoading }) => {
       <div className="mx-auto max-w-7xl">
         {partnersLoading ? (
           // Loading State
-          <div className="py-12 text-center">
+          <div className="py-10 text-center">
             <div className="inline-flex items-center px-4 py-2 text-sm font-semibold leading-6 text-gray-500 transition-colors duration-300 dark:text-gray-400">
               <svg
                 className="-ml-1 mr-3 h-5 w-5 animate-spin text-gray-500 transition-colors duration-300 dark:text-gray-400"
@@ -38,7 +38,7 @@ const Partners = ({ partners, partnersLoading }) => {
           <div className="py-12 text-center">
             <div className="text-gray-500 transition-colors duration-300 dark:text-gray-400">
               <svg
-                className="mx-auto h-12 w-12 text-gray-300 transition-colors duration-300 dark:text-gray-600"
+                className="mx-auto h-20 w-20 text-gray-300 transition-colors duration-300 dark:text-gray-600"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -89,7 +89,7 @@ const PartnerLogo = ({ partner }) => {
 
   const LogoContent = () => (
     <div className="group mx-6 flex items-center justify-center">
-      <div className="relative flex h-16 w-36 cursor-pointer items-center justify-center rounded-[10px] bg-transparent p-4 transition-all duration-300">
+      <div className="relative flex h-24 w-36 cursor-pointer items-center justify-center rounded-[10px] bg-transparent p-4 transition-all duration-300">
         {/* <div className="relative flex h-16 w-36 cursor-pointer items-center justify-center rounded-[10px] bg-transparent p-4 backdrop-blur-sm transition-all duration-300 dark:border dark:border-white/20 dark:bg-white/15 dark:backdrop-blur-sm"> */}
         <div className="relative z-10 flex h-full w-full items-center justify-center">
           {imageUrl ? (

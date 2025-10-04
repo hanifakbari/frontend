@@ -15,7 +15,7 @@ const Footer = ({ data, isDarkMode = false }) => {
       logo: "/logo.png",
     },
     contact: {
-      email: "info@ptasta.com",
+      email: "info@astalintas.co.id",
       phone: "+62 21 1234 5678",
       address: "Jakarta Selatan, DKI Jakarta, Indonesia",
     },
@@ -183,7 +183,7 @@ const Footer = ({ data, isDarkMode = false }) => {
                   </a>
                 </div>
 
-                <div className="flex items-start space-x-3">
+                <div className="flex items-center space-x-3">
                   <div
                     className={`mt-0.5 flex h-8 w-8 items-center justify-center rounded-lg ${
                       isDarkMode

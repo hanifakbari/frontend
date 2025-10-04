@@ -77,7 +77,7 @@ export const fetchHeroSection = async () => {
  */
 export async function submitContactForm(data) {
   try {
-    const res = await fetch(`${BASE_URL}/contacts`, {
+    const res = await fetch(`${BASE_URL}/Contacts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -102,14 +102,13 @@ export async function submitContactForm(data) {
     throw error;
   }
 }
-
 /**
  * Fetch all partners with their images
  */
 export async function fetchPartners() {
   try {
     const res = await fetch(
-      `${BASE_URL}/partners?populate=image`
+      `${BASE_URL}/Partners?populate=image` // ← Ganti jadi Partners
     );
 
     if (!res.ok) {
@@ -130,7 +129,6 @@ export async function fetchPartners() {
     const json = await res.json();
     console.log("Partners API response:", json);
 
-    // Return the data array, or empty array if no data
     return json.data || [];
   } catch (error) {
     console.error("❌ Failed to fetch partners:", error);
@@ -138,13 +136,10 @@ export async function fetchPartners() {
   }
 }
 
-/**
- * Fetch single partner by ID
- */
 export async function fetchPartner(id) {
   try {
     const res = await fetch(
-      `${BASE_URL}/partners/${id}?populate=image`
+      `${BASE_URL}/Partners/${id}?populate=image` // ← Ganti jadi Partners
     );
 
     if (!res.ok) {

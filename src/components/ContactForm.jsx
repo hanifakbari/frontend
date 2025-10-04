@@ -68,7 +68,7 @@ const ContactForm = ({ isDarkMode = false }) => {
         <div className="mb-16 text-center lg:mb-20">
           <div className="mb-4 md:mb-6">
             <span
-              className={`inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-medium tracking-wide uppercase backdrop-blur-sm transition-colors duration-300 sm:px-4 sm:py-2 sm:text-sm ${
+              className={`inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-medium uppercase tracking-wide backdrop-blur-sm transition-colors duration-300 sm:px-4 sm:py-2 sm:text-sm ${
                 isDarkMode
                   ? "border-blue-500/30 bg-gradient-to-r from-blue-500/20 via-orange-500/20 to-yellow-500/20 text-blue-200"
                   : "border-blue-300/40 bg-gradient-to-r from-blue-100/80 via-orange-100/60 to-yellow-100/80 text-blue-700"
@@ -84,7 +84,7 @@ const ContactForm = ({ isDarkMode = false }) => {
           </div>
 
           <h2
-            className={`font-dosis mb-6 text-3xl leading-tight font-bold transition-all duration-300 sm:text-4xl md:mb-8 md:text-5xl lg:text-6xl ${
+            className={`mb-6 font-dosis text-3xl font-bold leading-tight transition-all duration-300 sm:text-4xl md:mb-8 md:text-5xl lg:text-6xl ${
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
           >
@@ -101,7 +101,7 @@ const ContactForm = ({ isDarkMode = false }) => {
           ></div>
 
           <p
-            className={`mx-auto max-w-4xl text-lg leading-relaxed font-light transition-colors duration-300 md:text-xl ${
+            className={`mx-auto max-w-4xl text-lg font-light leading-relaxed transition-colors duration-300 md:text-xl ${
               isDarkMode ? "text-gray-300" : "text-gray-600"
             }`}
           >
@@ -131,7 +131,7 @@ const ContactForm = ({ isDarkMode = false }) => {
                   {
                     icon: Mail,
                     title: "Email",
-                    value: "info@ptasta.com",
+                    value: "info@astalintas.co.id",
                     description: "Send us an email",
                   },
                   {
@@ -392,7 +392,7 @@ const ContactForm = ({ isDarkMode = false }) => {
                 className={`flex w-full items-center justify-center space-x-2 rounded-lg px-6 py-3 font-semibold text-white transition-all duration-300 ${
                   isSubmitting
                     ? "cursor-not-allowed bg-gray-400"
-                    : "bg-blue-600 hover:scale-[1.02] hover:bg-blue-700 focus:ring-2 focus:ring-blue-500/50 focus:outline-none"
+                    : "bg-blue-600 hover:scale-[1.02] hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
                 }`}
               >
                 {isSubmitting ? (

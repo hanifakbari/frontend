@@ -90,7 +90,6 @@ const AboutSection = ({ isDarkMode }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Retry function
   const retryLoad = async () => {
     try {
       setLoading(true);
@@ -115,7 +114,6 @@ const AboutSection = ({ isDarkMode }) => {
     }
   };
 
-  // Icon mapping
   const getIcon = (iconName) => {
     const icons = {
       users: Users,
@@ -130,7 +128,6 @@ const AboutSection = ({ isDarkMode }) => {
     return icons[iconName] || CheckCircle;
   };
 
-  // Loading state
   if (loading) {
     return (
       <section
@@ -152,7 +149,6 @@ const AboutSection = ({ isDarkMode }) => {
     );
   }
 
-  // Use data (from API or fallback)
   const {
     title,
     subtitle,
@@ -167,7 +163,6 @@ const AboutSection = ({ isDarkMode }) => {
       id="about"
       className="relative py-20 transition-colors duration-500"
     >
-      {/* Error indicator */}
       {error && (
         <div
           className={`fixed right-4 top-20 z-50 max-w-sm rounded-lg p-3 text-sm ${
@@ -193,9 +188,7 @@ const AboutSection = ({ isDarkMode }) => {
           </p>
         </div>
       )}
-
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header Section */}
         <div className="mb-16 text-center lg:mb-20">
           {subtitle && (
             <div className="mb-4 md:mb-6">
@@ -217,7 +210,6 @@ const AboutSection = ({ isDarkMode }) => {
               </span>
             </div>
           )}
-
           <h2
             className={`mb-6 font-dosis text-3xl font-bold leading-tight transition-all duration-300 sm:text-4xl md:mb-8 md:text-5xl lg:text-6xl ${
               isDarkMode ? "text-white" : "text-gray-900"
@@ -225,8 +217,6 @@ const AboutSection = ({ isDarkMode }) => {
           >
             {title}
           </h2>
-
-          {/* Glowing underline */}
           <div
             className={`mx-auto mb-8 h-1 w-24 rounded-full shadow-lg transition-all duration-300 ${
               isDarkMode
@@ -234,12 +224,9 @@ const AboutSection = ({ isDarkMode }) => {
                 : "bg-gradient-to-r from-blue-600 via-orange-600 to-yellow-600 shadow-blue-400/40"
             }`}
           ></div>
-
-          {/* Description - handle both array and processed description */}
           {description && (
             <div className="mx-auto max-w-3xl">
               {Array.isArray(description) ? (
-                // Rich text format from Strapi
                 description.map((block, index) => (
                   <p
                     key={index}
@@ -255,7 +242,6 @@ const AboutSection = ({ isDarkMode }) => {
                   </p>
                 ))
               ) : (
-                // Processed string format
                 <p
                   className={`text-lg font-light leading-relaxed transition-colors duration-300 md:text-xl ${
                     isDarkMode
@@ -269,11 +255,8 @@ const AboutSection = ({ isDarkMode }) => {
             </div>
           )}
         </div>
-
-        {/* Vision & Mission Section */}
         <div className="mb-20">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-            {/* Vision */}
             {vision && (
               <div
                 className={`group cursor-pointer rounded-2xl border p-8 text-center backdrop-blur-sm transition-all duration-300 hover:shadow-md ${
@@ -291,7 +274,6 @@ const AboutSection = ({ isDarkMode }) => {
                 >
                   <Eye size={32} />
                 </div>
-
                 <h3
                   className={`mb-4 text-2xl font-semibold transition-colors duration-300 ${
                     isDarkMode
@@ -301,7 +283,6 @@ const AboutSection = ({ isDarkMode }) => {
                 >
                   {vision.title}
                 </h3>
-
                 <p
                   className={`leading-relaxed transition-colors duration-300 ${
                     isDarkMode
@@ -311,8 +292,6 @@ const AboutSection = ({ isDarkMode }) => {
                 >
                   {vision.description}
                 </p>
-
-                {/* Hover effect overlay */}
                 <div
                   className={`absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
                     isDarkMode
@@ -322,8 +301,6 @@ const AboutSection = ({ isDarkMode }) => {
                 ></div>
               </div>
             )}
-
-            {/* Mission */}
             {mission && (
               <div
                 className={`group cursor-pointer rounded-2xl border p-8 text-center backdrop-blur-sm transition-all duration-300 hover:shadow-md ${
@@ -341,7 +318,6 @@ const AboutSection = ({ isDarkMode }) => {
                 >
                   <Compass size={32} />
                 </div>
-
                 <h3
                   className={`mb-4 text-2xl font-semibold transition-colors duration-300 ${
                     isDarkMode
@@ -361,8 +337,6 @@ const AboutSection = ({ isDarkMode }) => {
                 >
                   {mission.description}
                 </p>
-
-                {/* Hover effect overlay */}
                 <div
                   className={`absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
                     isDarkMode
@@ -374,8 +348,6 @@ const AboutSection = ({ isDarkMode }) => {
             )}
           </div>
         </div>
-
-        {/* Company Commitments Section */}
         {commitments && commitments.length > 0 && (
           <div className="mb-20">
             <div className="mb-12 text-center">
@@ -434,10 +406,8 @@ const AboutSection = ({ isDarkMode }) => {
                     },
                   },
                 ];
-
                 const colorSet =
                   colors[index % colors.length];
-
                 return (
                   <div
                     key={index}
@@ -447,7 +417,6 @@ const AboutSection = ({ isDarkMode }) => {
                         : "border-gray-300/30 bg-white/20 hover:border-gray-400/50 hover:bg-white/40"
                     }`}
                   >
-                    {/* Icon */}
                     <div
                       className={`mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 ${
                         isDarkMode
@@ -457,8 +426,6 @@ const AboutSection = ({ isDarkMode }) => {
                     >
                       <IconComponent size={24} />
                     </div>
-
-                    {/* Content */}
                     <h4
                       className={`mb-4 text-xl font-semibold transition-colors duration-300 ${
                         isDarkMode
@@ -468,7 +435,6 @@ const AboutSection = ({ isDarkMode }) => {
                     >
                       {commitment.title}
                     </h4>
-
                     <p
                       className={`text-sm leading-relaxed transition-colors duration-300 ${
                         isDarkMode
@@ -478,8 +444,6 @@ const AboutSection = ({ isDarkMode }) => {
                     >
                       {commitment.description}
                     </p>
-
-                    {/* Hover effect overlay */}
                     <div
                       className={`absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
                         isDarkMode

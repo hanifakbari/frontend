@@ -15,6 +15,20 @@ const HeroSection = ({ isDarkMode }) => {
   const [partnersLoading, setPartnersLoading] =
     useState(true);
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navbarHeight = 120;
+      const elementPosition =
+        element.offsetTop - navbarHeight;
+
+      window.scrollTo({
+        top: elementPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   // Default fallback data
   const defaultHeroData = {
     title: "Empowering Digital Transformation",
@@ -94,7 +108,7 @@ const HeroSection = ({ isDarkMode }) => {
 
     loadHeroData();
     loadPartnersData();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Retry function untuk hero data
@@ -246,7 +260,10 @@ const HeroSection = ({ isDarkMode }) => {
         </div>
       )}
 
-      <div className="relative flex min-h-screen items-center justify-center overflow-hidden transition-all duration-700">
+      <div
+        id="home"
+        className="relative flex min-h-screen items-center justify-center overflow-hidden transition-all duration-700"
+      >
         {/* Background Desktop */}
         <div className="absolute inset-0 hidden lg:flex">
           <div className="w-full transition-all duration-700 lg:w-3/5">
@@ -313,6 +330,31 @@ const HeroSection = ({ isDarkMode }) => {
                   </p>
                 )}
               </div>
+            </div>
+
+            <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:gap-6">
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="group relative w-full overflow-hidden rounded-[8px] bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 font-bold text-white transition-all duration-500 hover:scale-105 hover:from-blue-700 hover:to-blue-800 hover:shadow-blue-500/40 sm:w-auto sm:px-8 sm:py-4"
+              >
+                <div className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-blue-400/0 via-blue-400/30 to-blue-400/0 transition-transform duration-1000 group-hover:translate-x-[100%]"></div>
+                <span className="relative flex items-center justify-center">
+                  Start Consultation
+                </span>
+              </button>
+
+              <button
+                onClick={() => scrollToSection("services")}
+                className={`group relative w-full overflow-hidden rounded-[8px] border-2 px-6 py-3 font-bold backdrop-blur-md transition-all duration-500 hover:scale-105 sm:w-auto sm:px-8 sm:py-4 ${
+                  isDarkMode
+                    ? "border-white/30 bg-white/10 text-gray-200 hover:border-white/50 hover:bg-white/20 hover:text-white"
+                    : "border-gray-400/50 bg-white/70 text-gray-800 hover:border-gray-500/70 hover:bg-white/90 hover:text-gray-900"
+                }`}
+              >
+                <span className="relative flex items-center justify-center">
+                  Explore Solutions
+                </span>
+              </button>
             </div>
 
             {/* Partners Section */}

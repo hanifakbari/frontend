@@ -540,7 +540,7 @@ const SolutionsSection = ({ isDarkMode }) => {
         )}
 
         {/* Call to Action */}
-        <div className="mt-16 text-center lg:mt-20">
+        {/* <div className="mt-16 text-center lg:mt-20">
           <div className="mb-6">
             <h3
               className={`text-2xl font-semibold transition-colors duration-300 ${
@@ -566,7 +566,7 @@ const SolutionsSection = ({ isDarkMode }) => {
               Get Free Consultation
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
